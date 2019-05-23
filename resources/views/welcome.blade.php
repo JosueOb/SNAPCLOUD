@@ -7,7 +7,6 @@
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     </head>
     <body>
-            <h1>Hello, world!</h1>
             
         <div id="app">
             <example-component></example-component>
