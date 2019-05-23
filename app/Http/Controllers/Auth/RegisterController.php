@@ -49,7 +49,8 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:50'],
+            'username' => ['required', 'string', 'max:50', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -63,9 +64,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $avatar = 'https://ui-avatars.com/api/?name='.\str_replace(' ','+',$data['name']).'&size=255';
+        
+        // dd($data);
         return User::create([
             'name' => $data['name'],
+            'username' => $data['username'],
             'email' => $data['email'],
+            'avatar'=> $avatar,
             'password' => Hash::make($data['password']),
         ]);
     }
