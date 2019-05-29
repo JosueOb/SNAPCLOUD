@@ -1,6 +1,7 @@
 <?php
 
 namespace App;
+use App\Notifications\UserResetPassword;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -36,4 +37,9 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function sendPasswordResetNotification($token){
+        $this->notify(new UserResetPassword($token));
+    }
+
 }
