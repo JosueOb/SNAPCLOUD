@@ -3,10 +3,10 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class=" col-lg-6 col-md-7 col-sm-10 col-12">
+        <div class="col-12 col-md-6">
             <div class="card">
                 {{-- <div class="card-header">{{ __('Register') }}</div> --}}
-                <div class="card-header">Registrar</div>
+                <div class="card-header">Formulario</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
@@ -86,6 +86,15 @@
                                 <button type="submit" class="btn btn-primary btn-lg btn-block">Registrar</button>
                         </div>
                     </form>
+                </div>
+            </div>
+        </div>
+        <div class="col col-md-6">
+            <div class="card">
+                <div class="card-header">Redes Sociales</div>
+                <div class="card-body">
+                    <a href="/auth/facebook" class="btn btn-outline-primary btn-lg btn-block"><i class="fab fa-facebook-f"> Facebook</i></a>
+                    <a href="/auth/google" class="btn btn-outline-secondary btn-lg btn-block"><i class="fab fa-google"> Google</i></a>
                 </div>
             </div>
         </div>
