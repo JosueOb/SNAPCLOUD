@@ -23,6 +23,7 @@ Route::get('/auth/facebook', 'SocialAuthController@facebook');
 Route::get('/auth/facebook/callback', 'SocialAuthController@facebookCallback');
 
 Route::get('/auth/google','SocialAuthController@google');
+Route::get('/auth/google/callback','SocialAuthController@googleCallback');
 
 
 
