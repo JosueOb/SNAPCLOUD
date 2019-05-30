@@ -53,7 +53,6 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:50', 'min:3'],
-            'username' => ['required', 'string', 'max:50', 'unique:users', 'min:3'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -71,7 +70,6 @@ class RegisterController extends Controller
         $avatar = 'https://ui-avatars.com/api/?name='.\str_replace(' ','+',$data['name']).'&size=255';
         return User::create([
             'name' => $data['name'],
-            'username' => $data['username'],
             'email' => $data['email'],
             'avatar'=> $avatar,
             'password' => Hash::make($data['password']),

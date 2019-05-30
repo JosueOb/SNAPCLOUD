@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col col-md-6">
             <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>
 
@@ -74,6 +74,15 @@
                             </div>
                         </div>
                     </form>
+                </div>
+            </div>
+        </div>
+        <div class="col col-md-6">
+            <div class="card">
+                <div class="card-header">Redes Sociales</div>
+                <div class="card-body">
+                    <a href="/auth/facebook" class="btn btn-outline-primary btn-lg btn-block"><i class="fab fa-facebook-f"> Facebook</i></a>
+                    <a href="/auth/google" class="btn btn-outline-secondary btn-lg btn-block"><i class="fab fa-google"> Google</i></a>
                 </div>
             </div>
         </div>

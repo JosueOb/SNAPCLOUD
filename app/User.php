@@ -6,6 +6,9 @@ use App\Notifications\{UserResetPassword, UserVerifyEmail};
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
+use App\SocialProfile;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -45,5 +48,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function sendEmailVerificationNotification()
     {
         $this->notify(new UserVerifyEmail);
+    }
+    
+    // RELACIONES
+    // Un usuario puede tener varios social profiles
+    public function socialProfiles(){
+        return $this->HasMany(SocialProfile::class);
     }
 }

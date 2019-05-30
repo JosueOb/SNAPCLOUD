@@ -13,7 +13,7 @@
                         @csrf
 
                         <div class="form-row">
-                            <div class="form-group col-md-6">
+                            {{-- <div class="form-group"> --}}
                                 {{-- <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label> --}}
                                 <label for="name">Nombre Completo</label>
 
@@ -25,15 +25,15 @@
                                     </span>
                                 @enderror
                                 
-                            </div>
-                            <div class="form-group col-md-6">
+                            {{-- </div> --}}
+                            {{-- <div class="form-group col-md-6"> --}}
                                {{-- <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label> --}}
-                               <label for="username">Nombre de usuario</label>
+                               {{-- <label for="username">Nombre de usuario</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">@</div>
                                     </div>
-                                    <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
+                                    <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" autocomplete="username" autofocus>
                                     @error('username')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -42,7 +42,7 @@
                                 </div>
 
                                 
-                            </div>
+                            </div> --}}
                         </div>
 
                         <div class="form-group">
