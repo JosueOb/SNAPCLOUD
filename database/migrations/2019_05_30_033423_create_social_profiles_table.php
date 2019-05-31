@@ -20,6 +20,7 @@ class CreateSocialProfilesTable extends Migration
             
             $table->unsignedBigInteger('user_id');
             $table->string('social_id');
+            $table->string('provider');
 
             $table->foreign('user_id')->references('id')->on('users');
         });
