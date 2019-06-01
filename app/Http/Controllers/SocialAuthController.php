@@ -6,86 +6,55 @@ use Illuminate\Http\Request;
 use Socialite;
 Use App\User;
 use App\SocialProfile;
+use Illuminate\Support\Facades\Auth;
 
 class SocialAuthController extends Controller
 {
-    public function facebook(){
-        return Socialite::with('facebook')->redirect();
+    public function redirect($provider){
+        // $provider obtiene el proveedor de los datos, es decir, que red social se esta ocupando
+        // dd($provider);
+        return Socialite::with($provider)->redirect();
     }
-    public function facebookCallback(){
-        $userFaceboock = Socialite::driver('facebook')->user();
-        
-        $userSocialProfile = $this->thereIsASocialProfile($userFaceboock);
 
+    public function callback($provider){
+        // dd($provider);
+        $userProvider = Socialite::driver($provider)->user();
+        // dd($userProvider);
+        //se verifica si ya existe el perfil social del usuario
+        $userSocialProfile = $this->thereIsASocialProfile($userProvider);
+        //en caso de que exista el perfil, se realiza login del usuario
         if($userSocialProfile !== null){
-            auth()->login($userSocialProfile);
+            // auth()->login($userSocialProfile);
+            Auth::login($userSocialProfile);
             return redirect('/home');
         }else{
-            //se verifca si el correo del perfil social existe
-            $verifyEmail = User::where('email',$userFaceboock->email)->first();
-            if($verifyEmail !== null){
-                dd('Coreo ya ocupado');
-            }else{
+            //caso contrario se verifca si el correo del perfil social existe
+            $userVerifyEmail = User::where('email',$userProvider->email)->first();
+            // dd($verifyEmail);
+            //si el correo del perfil social no existe se lo registra al usuario
+            if($userVerifyEmail == null){
                 //se crea al usuario
-                $user = User::create([
-                    'name' => $userFaceboock->name,
-                    'email' => $userFaceboock->email,
-                    'avatar' => $userFaceboock->avatar,
+                $userVerifyEmail = User::create([
+                    'name' => $userProvider->name,
+                    'email' => $userProvider->email,
+                    'avatar' => $userProvider->avatar,
                     'password' => str_random(16),
                 ]);
-        
-                $pofile = SocialProfile::create([
-                    'social_id'=> $userFaceboock->id,
-                    'user_id' => $user->id,
-                    'provider' => 'facebook'
-                ]);
-                //se registra al usuario y a su vez se marca que el correo ha sido verificado
-                $user->markEmailAsVerified();
-                //se realiza un login del usuario que se acabde crear
-                auth()->login($user);
-                return redirect('/home');
+                $userVerifyEmail->markEmailAsVerified();
             }
+            //en caso de que exista el correo, se le agrega a la cuenta del usuario un nuevo perfil social
+            $pofile = SocialProfile::create([
+                'social_id'=> $userProvider->id,
+                'user_id' => $userVerifyEmail->id,
+                'provider' => $provider
+            ]);
+            
+            //se realiza un login del usuario que se acabde crear
+            auth()->login($userVerifyEmail);
+            return redirect('/home');
         }
     }
 
-    public function google(){
-        return Socialite::with('Google')->redirect();
-    }
-    public function googleCallback(){
-        $userGoogle = Socialite::driver('Google')->user();
-        $userSocialProfile = $this->thereIsASocialProfile($userGoogle);
-
-        if($userSocialProfile !== null){
-            auth()->login($userSocialProfile);
-            return redirect('/home');
-        }else{
-            //se verifca si el correo del perfil social existe
-            $verifyEmail = User::where('email',$userGoogle->email)->first();
-            if($verifyEmail !== null){
-                dd('Coreo ya ocupado');
-            }else{
-                //se crea al usuario
-                $user = User::create([
-                    'name' => $userGoogle->name,
-                    'email' => $userGoogle->email,
-                    'avatar' => $userGoogle->avatar,
-                    'password' => str_random(16),
-                ]);
-        
-                $pofile = SocialProfile::create([
-                    'social_id'=> $userGoogle->id,
-                    'user_id' => $user->id,
-                    'provider' => 'google'
-                ]);
-                //se registra al usuario y a su vez se marca que el correo ha sido verificado
-                $user->markEmailAsVerified();
-                //se realiza un login del usuario que se acabde crear
-                auth()->login($user);
-                return redirect('/home');
-            }
-        }
-
-    }
 
     public function thereIsASocialProfile($userQuery){
 
