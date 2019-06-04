@@ -24,7 +24,7 @@ class SocialAuthController extends Controller
         $userSocialProfile = $this->thereIsASocialProfile($userProvider);
         //en caso de que exista el perfil, se realiza login del usuario
         if($userSocialProfile !== null){
-            // auth()->login($userSocialProfile);
+            //  auth()->login($userSocialProfile);
             Auth::login($userSocialProfile);
             return redirect('/home');
         }else{
