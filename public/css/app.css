@@ -10662,7 +10662,7 @@ a.text-dark:focus {
   }
 }
 
-.new-class {
-  background-color: red;
+table tr:hover {
+  background-color: grey;
 }
 
