@@ -9,10 +9,14 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 use App\SocialProfile;
+use Caffeinated\Shinobi\Concerns\HasRolesAndPermissions;
+
+
 
 class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
+    use HasRolesAndPermissions;
 
     /**
      * The attributes that are mass assignable.
