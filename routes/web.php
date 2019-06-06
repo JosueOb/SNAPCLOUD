@@ -30,12 +30,36 @@ Route::get('/auth/{provider}/callback', 'SocialAuthController@callback');
 
 
 
-/*
-RUTAS PRIVADAS
-*/
-
-//
 Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 
+/*
+    Grupo de rutas las cuales requieren de autenticación
+*/
+Route::middleware(['auth'])->group(function(){
+    //Roles
+    //el método middleware  buscará si el nombre existe, es decir, va a buscar en el app/Http/Kernel.php
+    //en el arreglo de $routeMiddleware si CAN existe, en caso de que exista ejecutará a la clase.
+    Route::post('roles/store','RoleController@store')->name('roles.store')->middleware('can:roles.create');
+    Route::get('roles','RoleController@index')->name('roles.index')->middleware('can:roles.index');
+    Route::get('roles/create','RoleController@create')->name('roles.create')->middleware('can:roles.create');
+    Route::put('roles/{role}','RoleController@update')->name('roles.update')->middleware('can:roles.edit');
+    Route::get('roles/{role}','RoleController@show')->name('roles.show')->middleware('can:roles.show');
+    Route::delete('roles/{role}','RoleController@destroy')->name('roles.destroy')->middleware('can:roles.destroy');
+    Route::get('roles/{role}/edit','RoleController@edit')->name('roles.edit')->middleware('can:roles.edit');
+    //Publications
+    Route::post('publications/store','PublicationContoller@store')->name('publications.store')->middleware('can:publications.create');
+    Route::get('publications','PublicationContoller@index')->name('publications.index')->middleware('can:publications.index');
+    Route::get('publications/create','PublicationContoller@create')->name('publications.create')->middleware('can:publications.create');
+    Route::put('publications/{role}','PublicationContoller@update')->name('publications.update')->middleware('can:publications.edit');
+    Route::get('publications/{role}','PublicationContoller@show')->name('publications.show')->middleware('can:publications.show');
+    Route::delete('publications/{role}','PublicationContoller@destroy')->name('publications.destroy')->middleware('can:publications.destroy');
+    Route::get('publications/{role}/edit','PublicationContoller@edit')->name('publications.edit')->middleware('can:publications.edit');
+    //Users
+    Route::get('users','UserController@index')->name('users.index')->middleware('can:users.index');
+    Route::put('users/{role}','UserController@update')->name('users.update')->middleware('can:users.edit');
+    Route::get('users/{role}','UserController@show')->name('users.show')->middleware('can:users.show');
+    Route::delete('users/{role}','UserController@destroy')->name('users.destroy')->middleware('can:users.destroy');
+    Route::get('users/{role}/edit','UserController@edit')->name('users.edit')->middleware('can:users.edit');
+});

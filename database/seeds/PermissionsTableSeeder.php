@@ -61,31 +61,31 @@ class PermissionsTableSeeder extends Seeder
             'description'=>'Eliminar cualquier rol del sistema',
         ]);
 
-        //Productos
+        //Publication
         Permission::create([
-            'name'=> 'Navegar productos',
-            'slug'=> 'products.index',//permisos sobre una ruta
-            'description'=>'Lista y navega todos los productos del sistema',
+            'name'=> 'Navegar publicaciones',
+            'slug'=> 'publications.index',//permisos sobre una ruta
+            'description'=>'Lista y navega todos los publicaciones del sistema',
         ]);
         Permission::create([
-            'name'=> 'Ver detalle de producto',
-            'slug'=> 'products.show',//permisos sobre una ruta
-            'description'=>'Ver en detalle cada producto del sistema',
+            'name'=> 'Ver detalle de publicación',
+            'slug'=> 'publications.show',//permisos sobre una ruta
+            'description'=>'Ver en detalle cada publicación del sistema',
         ]);
         Permission::create([
-            'name'=> 'Creación de productos',
-            'slug'=> 'products.create',//permisos sobre una ruta
-            'description'=>'Crear a los productos del sistema',
+            'name'=> 'Creación de publicaciones',
+            'slug'=> 'publications.create',//permisos sobre una ruta
+            'description'=>'Crear a los publicaciones del sistema',
         ]);
         Permission::create([
-            'name'=> 'Edición de productos',
-            'slug'=> 'products.edit',//permisos sobre una ruta
-            'description'=>'Editar cualquier datos de un producto del sistema',
+            'name'=> 'Edición de publicaciones',
+            'slug'=> 'publications.edit',//permisos sobre una ruta
+            'description'=>'Editar cualquier datos de un publicación del sistema',
         ]);
         Permission::create([
-            'name'=> 'Eliminar productos',
-            'slug'=> 'products.destroy',//permisos sobre una ruta
-            'description'=>'Eliminar cualquier producto del sistema',
+            'name'=> 'Eliminar publicaciones',
+            'slug'=> 'publications.destroy',//permisos sobre una ruta
+            'description'=>'Eliminar cualquier publicación del sistema',
         ]);
     }
 }
