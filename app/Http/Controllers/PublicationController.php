@@ -25,7 +25,8 @@ class PublicationController extends Controller
      */
     public function create()
     {
-        //
+        //se retorna la vista para crear una publicación
+        return view('publications.create');
     }
 
     /**
@@ -36,7 +37,11 @@ class PublicationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Persiste en la BDD el registro creado
+        // all() todo lo que se pase en el formulario va a serivir para que se cree el producto
+        $publication = Publication::create($request->all());
+        // with() envia un mensaje en una variable que se le asigne
+        return redirect()->route('publications.edit', $publication->id)->with('info', 'Publicación guardado con éxito');
     }
 
     /**
@@ -47,7 +52,8 @@ class PublicationController extends Controller
      */
     public function show(Publication $publication)
     {
-        //
+        //se presenta un producto
+        return view('publications.show', compact($publication));
     }
 
     /**
@@ -58,7 +64,8 @@ class PublicationController extends Controller
      */
     public function edit(Publication $publication)
     {
-        //
+        //Muestra el formulario de actualización
+        return view('publications.edit', compact($publication));
     }
 
     /**
@@ -70,7 +77,10 @@ class PublicationController extends Controller
      */
     public function update(Request $request, Publication $publication)
     {
-        //
+        //Se actualiza la publicación en la BDD
+        $publication->update($request->all());
+
+        return redirect()->route('publications.update', $publication->id)->with('info', 'Publicación actualizado con éxito');
     }
 
     /**
@@ -81,6 +91,9 @@ class PublicationController extends Controller
      */
     public function destroy(Publication $publication)
     {
-        //
+        //Se elemina a la publicación con el id, enviado en la URL
+        $publication->delete();
+        //se retorna a la vista anterior con un mensaje en la variable info
+        return back()->with('info', 'Eliminado correctamente');
     }
 }
