@@ -53,7 +53,7 @@ class PublicationController extends Controller
     public function show(Publication $publication)
     {
         //se presenta un producto
-        return view('publications.show', compact($publication));
+        return view('publications.show', compact('publication'));
     }
 
     /**
