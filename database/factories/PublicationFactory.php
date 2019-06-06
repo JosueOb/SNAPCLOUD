@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Publication::class, function (Faker $faker) {
     return [
-        'title'=>$faker->title,
+        'title'=>$faker->sentence($nbWords = 6, $variableNbWords = true),
         'description'=>$faker->realText($maxNbChars = 200, $indexSize = 2),
         'image'=>$faker->imageUrl($width = 640, $height = 480),
     ];
