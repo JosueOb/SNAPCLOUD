@@ -49,13 +49,13 @@ Route::middleware(['auth'])->group(function(){
     Route::delete('roles/{role}','RoleController@destroy')->name('roles.destroy')->middleware('can:roles.destroy');
     Route::get('roles/{role}/edit','RoleController@edit')->name('roles.edit')->middleware('can:roles.edit');
     //Publications
-    Route::post('publications/store','PublicationContoller@store')->name('publications.store')->middleware('can:publications.create');
-    Route::get('publications','PublicationContoller@index')->name('publications.index')->middleware('can:publications.index');
-    Route::get('publications/create','PublicationContoller@create')->name('publications.create')->middleware('can:publications.create');
-    Route::put('publications/{role}','PublicationContoller@update')->name('publications.update')->middleware('can:publications.edit');
-    Route::get('publications/{role}','PublicationContoller@show')->name('publications.show')->middleware('can:publications.show');
-    Route::delete('publications/{role}','PublicationContoller@destroy')->name('publications.destroy')->middleware('can:publications.destroy');
-    Route::get('publications/{role}/edit','PublicationContoller@edit')->name('publications.edit')->middleware('can:publications.edit');
+    Route::post('publications/store','PublicationController@store')->name('publications.store')->middleware('can:publications.create');
+    Route::get('publications','PublicationController@index')->name('publications.index')->middleware('can:publications.index');
+    Route::get('publications/create','PublicationController@create')->name('publications.create')->middleware('can:publications.create');
+    Route::put('publications/{role}','PublicationController@update')->name('publications.update')->middleware('can:publications.edit');
+    Route::get('publications/{role}','PublicationController@show')->name('publications.show')->middleware('can:publications.show');
+    Route::delete('publications/{role}','PublicationController@destroy')->name('publications.destroy')->middleware('can:publications.destroy');
+    Route::get('publications/{role}/edit','PublicationController@edit')->name('publications.edit')->middleware('can:publications.edit');
     //Users
     Route::get('users','UserController@index')->name('users.index')->middleware('can:users.index');
     Route::put('users/{role}','UserController@update')->name('users.update')->middleware('can:users.edit');
