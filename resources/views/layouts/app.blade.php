@@ -36,7 +36,7 @@
                     <ul class="navbar-nav mr-auto">
                         @can('publications.index')
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('publications.index')}}">Productos</a>
+                            <a class="nav-link" href="{{ route('publications.index')}}">Publicaciones</a>
                         </li>
                         @endcan
                         @can('users.index')
