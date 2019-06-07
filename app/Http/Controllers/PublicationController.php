@@ -65,7 +65,7 @@ class PublicationController extends Controller
     public function edit(Publication $publication)
     {
         //Muestra el formulario de actualización
-        return view('publications.edit', compact($publication));
+        return view('publications.edit', compact('publication'));
     }
 
     /**
@@ -78,6 +78,7 @@ class PublicationController extends Controller
     public function update(Request $request, Publication $publication)
     {
         //Se actualiza la publicación en la BDD
+        // dd($request->all());
         $publication->update($request->all());
 
         return redirect()->route('publications.update', $publication->id)->with('info', 'Publicación actualizado con éxito');
