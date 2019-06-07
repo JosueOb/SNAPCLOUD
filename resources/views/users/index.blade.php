@@ -6,12 +6,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    Publicaciones
-                    @can('publications.create')
-                        <a class="btn btn-primary btn-sm float-right" href="{{ route('publications.create') }}">
-                            Crear
-                        </a>
-                    @endcan
+                    Usuarios
                 </div>
 
                 <div class="card-body">
@@ -19,28 +14,30 @@
                         <thead>
                             <tr>
                                 <th width='10px'>ID</th>
-                                <th>Título</th>
+                                <th>Nombre</th>
+                                <th>Correo</th>
                                 <th colspan="3">&nbsp;</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($publications as $publication)
+                            @foreach ($users as $user)
                                 <tr>
-                                    <td>{{$publication->id}}</td>
-                                    <td>{{$publication->title}}</td>
+                                    <td>{{$user->id}}</td>
+                                    <td>{{$user->name}}</td>
+                                    <td>{{$user->email}}</td>
                                     <td width='10px'>
-                                        @can('publications.show')
-                                            <a class="btn btn-sm btn-info" href="{{ route('publications.show', $publication->id) }}">Ver</a>
+                                        @can('users.show')
+                                            <a class="btn btn-sm btn-info" href="{{ route('users.show', $user->id) }}">Ver</a>
                                         @endcan
                                     </td>
                                     <td width='10px'>
-                                        @can('publications.edit')
-                                            <a class="btn btn-sm btn-secondary" href="{{ route('publications.edit', $publication->id) }}">Editar</a>
+                                        @can('users.edit')
+                                            <a class="btn btn-sm btn-secondary" href="{{ route('users.edit', $user->id) }}">Editar</a>
                                         @endcan
                                     </td>
                                     <td width='10px'>
-                                        @can('publications.destroy')
-                                            <form action="{{ route('publications.destroy', $publication->id) }}" method="POST">
+                                        @can('users.destroy')
+                                            <form action="{{ route('users.destroy', $user->id) }}" method="POST">
                                                 @csrf
                                                 @method('delete')
                                                 <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
@@ -51,7 +48,7 @@
                             @endforeach
                         </tbody>
                    </table>
-                   {{$publications->render()}}
+                   {{$users->render()}}
                 </div>
             </div>
         </div>

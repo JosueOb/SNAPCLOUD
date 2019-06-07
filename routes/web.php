@@ -58,8 +58,8 @@ Route::middleware(['auth'])->group(function(){
     Route::get('publications/{publication}/edit','PublicationController@edit')->name('publications.edit')->middleware('can:publications.edit');
     //Users
     Route::get('users','UserController@index')->name('users.index')->middleware('can:users.index');
-    Route::put('users/{role}','UserController@update')->name('users.update')->middleware('can:users.edit');
-    Route::get('users/{role}','UserController@show')->name('users.show')->middleware('can:users.show');
-    Route::delete('users/{role}','UserController@destroy')->name('users.destroy')->middleware('can:users.destroy');
-    Route::get('users/{role}/edit','UserController@edit')->name('users.edit')->middleware('can:users.edit');
+    Route::put('users/{user}','UserController@update')->name('users.update')->middleware('can:users.edit');
+    Route::get('users/{user}','UserController@show')->name('users.show')->middleware('can:users.show');
+    Route::delete('users/{user}','UserController@destroy')->name('users.destroy')->middleware('can:users.destroy');
+    Route::get('users/{user}/edit','UserController@edit')->name('users.edit')->middleware('can:users.edit');
 });
