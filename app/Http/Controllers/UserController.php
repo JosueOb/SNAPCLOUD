@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Caffeinated\Shinobi\Models\Role;
 
 class UserController extends Controller
 {
@@ -38,8 +39,11 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        //se traen todos los roles disponobles en la BDD
+        $roles = Role::all();
+
         //Muestra el formulario de actualización
-        return view('users.edit', compact('user'));
+        return view('users.edit', compact('user','roles'));
     }
 
     /**
@@ -52,10 +56,15 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         //Se actualiza al usuario en la BDD
-        // dd($request->all());
+        //dd($request->all());
+        
         $user->update($request->all());
 
-        return redirect()->route('users.update', $user->id)->with('info', 'Usuario actualizado con éxito');
+        //actualizar roles
+        //se sincronizan los roles seleccionados en el formulario
+        $user->roles()->sync($request->get('roles'));
+
+        return redirect()->route('users.edit', $user->id)->with('info', 'Usuario actualizado con éxito');
     }
 
     /**

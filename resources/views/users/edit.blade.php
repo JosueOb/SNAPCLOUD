@@ -15,9 +15,23 @@
                             <label for="title">Nombre</label>
                             <input type="text" name="title" class="form-control" value="{{ $user->name}}">
                         </div>
+                        <hr>
+                        <h3>Lista de roles</h3>
                         <div class="form-group">
-                            <label for="description">Email</label>
-                            <input type="text" name="description" class="form-control" value="{{ $user->email}}">
+                            <ul class="list-unstyled">
+                                @foreach ($roles as $role)
+                                    <li>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name='roles[]' value="{{ $role->id}}" id="{{$role->name}}"
+                                            @if ($user->roles->contains($role->id)) checked @endif>
+                                            <label class="form-check-label" for="{{$role->name}}">
+                                                {{ $role->name}}
+                                                <em>({{ $role->description ?: 'Sin descripción'}})</em>
+                                            </label>
+                                        </div>
+                                    </li>
+                                @endforeach
+                            </ul>
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-sm btn-primary">Guardar</button>
